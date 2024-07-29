@@ -17,7 +17,7 @@ body {
     justify-content: center;
     align-items: flex-end;
     width: 150px;
-    height: 70vh;
+    height: 500px;
     background-color: #ffffff;
     border: 2px solid #007bff;
     border-radius: 10px;
@@ -27,22 +27,6 @@ body {
 
 #lift {
     transition: padding-bottom 1s;
-}
-
-.ground {
-    padding-bottom: 0px;
-}
-
-.first {
-    padding-bottom: 120px;
-}
-
-.second {
-    padding-bottom: 240px;
-}
-
-.third {
-    padding-bottom: 340px;
 }
 
 #btndiv {
