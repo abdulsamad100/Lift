@@ -28,6 +28,11 @@ body {
     overflow: hidden;
 }
 
+#people{
+    position: absolute;
+    transform: translate(-115%,30%);
+}
+
 #lift {
     transition: padding-bottom 1s;
 }

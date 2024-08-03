@@ -1,10 +1,12 @@
-const liftTime = 1000;
-const chainTime = 1200;
-const waitTimeAfterOpen = 1000;
-const floorSelector = '#floor-';
-let liftQueue = [];
 const lift = document.querySelector('#lift');
 const chain = document.querySelector('#chain');
+const people = document.querySelector('#people');
+const chainTime = 1200;
+const waitAfterClose = 1000;
+const waitAfterOpen = 1000;
+const waitBeforeGround=10
+const floorSelector = '#floor-';
+let liftQueue = [];
 let isMoving = false;
 let gDelay = 0;
 let gStatus = true;
@@ -22,15 +24,17 @@ const changeFloor = (chainHeight, floor) => {
   isMoving = true;
   const toMove = { CH: chainHeight, f: floor };
   const btnPressed = document.querySelector(`${floorSelector}${toMove.f}`);
-      btnPressed.style.transition = '.5s';
-      btnPressed.style.backgroundColor = 'red';
+  btnPressed.style.transition = '.5s';
+  btnPressed.style.backgroundColor = 'red';
   btnPressed.disabled = true;
+  people.style.display = "none";
   lift.src = 'Lift-Close.png';
   setTimeout(() => {
     chain.style.transition = `${chainTime}ms`;
     chain.style.height = `${toMove.CH}px`;
     setTimeout(() => {
       lift.src = 'Lift-Open.png';
+  people.style.display = "inline";
       btnPressed.style.transition = '.5s';
       btnPressed.style.backgroundColor = '';
       btnPressed.disabled = false;
@@ -43,9 +47,9 @@ const changeFloor = (chainHeight, floor) => {
         } else {
           setGround();
         }
-      }, waitTimeAfterOpen);
+      }, waitAfterOpen);
     }, chainTime);
-  }, liftTime);
+  }, waitAfterClose);
 };
 
 const setGround = () => {
@@ -55,7 +59,7 @@ const setGround = () => {
     if (!gStatus) {
       return;
     }
-    if (gDelay >= 10) {
+    if (gDelay >= waitBeforeGround) {
       if (currentFloor !== 'G') {
         changeFloor('375', 'G');
       }
